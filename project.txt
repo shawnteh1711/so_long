@@ -28,5 +28,22 @@ Bonus
 // display movement count directly on screen
 
 Keypoint
-minilibx
+1. minilibx
 - basic graphical library writing in C
+- use minilibx_opengl for mac
+- require Appkit and OpenGL to compile
+
+External function 
+// all system call function: open, close, read, write
+// allocate memory: malloc , free
+// math library
+// Minilibx function
+// ft_printf, get_next_line, all code that you code.
+
+
+Minilibx function
+// mlx_init : functionto connect mac graphical server
+// mlx_new_window : manage mlx_new_window
+// mlx_pixel_put : draw inside window
+// mlx_new_image : manipulate put_images
+// mlx_loop : handle keyboard or mourse events
