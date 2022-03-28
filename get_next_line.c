@@ -6,36 +6,20 @@
 /*   By: steh <steh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 10:17:30 by steh              #+#    #+#             */
-/*   Updated: 2022/03/26 19:26:23 by steh             ###   ########.fr       */
+/*   Updated: 2022/03/28 15:57:38 by steh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-// read the text file pointed by fd, one line at a time
-// return NULL if there is nothing to read or an error occured
-char	*get_next_line(int fd)
-{
-	char		*line;
-	static char	*save_line;
-
-	if (fd < 0 || BUFFER_SIZE <= 0)
-		return (0);
-	save_line = ft_read_and_save(fd, save_line);
-	if (!save_line)
-		return (NULL);
-	line = ft_get_line(save_line);
-	save_line = ft_save_next_line(save_line);
-	return (line);
-}
-
 // ssize_t read(int fd, void *buf, size_t count);
 // if read count is zero(BUFFER SIZE), read may return error
 // keep reading while the char *save not find '\n' using strchr
+
 char	*ft_read_and_save(int fd, char *save_line)
 {
-	char		*buffer;
-	ssize_t		read_bytes;
+	char	*buffer;
+	int		read_bytes;
 
 	read_bytes = 1;
 	buffer = malloc((BUFFER_SIZE + 1) * sizeof(char));
@@ -53,6 +37,7 @@ char	*ft_read_and_save(int fd, char *save_line)
 		save_line = ft_strjoin(save_line, buffer);
 	}
 	free(buffer);
+
 	return (save_line);
 }
 
@@ -100,4 +85,21 @@ char	*ft_save_next_line(char *save_line)
 	s[j] = '\0';
 	free(save_line);
 	return (s);
+}
+
+// read the text file pointed by fd, one line at a time
+// return NULL if there is nothing to read or an error occured
+char	*get_next_line(int fd)
+{
+	char		*line;
+	static char	*save_line;
+
+	if (fd < 0 || BUFFER_SIZE <= 0)
+		return (0);
+	save_line = ft_read_and_save(fd, save_line);
+	if (!save_line)
+		return (NULL);
+	line = ft_get_line(save_line);
+	save_line = ft_save_next_line(save_line);
+	return (line);
 }

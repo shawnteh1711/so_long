@@ -6,7 +6,7 @@
 /*   By: steh <steh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 14:52:47 by steh              #+#    #+#             */
-/*   Updated: 2022/03/26 19:06:34 by steh             ###   ########.fr       */
+/*   Updated: 2022/03/28 19:41:30 by steh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,23 +36,30 @@ int	is_ber(char *file)
 // line. If same length then it is same.
 int	is_rectangular(char *file)
 {
-	const int	fd = open(file, O_RDONLY);
+	int		fd;
+	int		is_rect;
+	size_t	col_len;
 	char	*line;
 
+	fd = open(file, O_RDONLY);
 	if (fd < 0) 
 	{ 
 		perror("r1");
 		exit(1); 
-	} 
+	}
 	line = get_next_line(fd);
-	while (line != NULL)
+	col_len = ft_strlen(line);
+	/// check len continue
+	while (line)
 	{
-		ft_printf("%s", line);
+		if (ft_strlen(line) != col_len)
+			is_rect = 1;
 		free(line);
 		line = get_next_line(fd);
 	}
-	ft_printf("\n\n");
 	close(fd);
+	if (is_rect)
+		return (1);
 	return (0);
 }
 
@@ -60,6 +67,5 @@ int	map_validity(char *file)
 {
 	if (!is_ber(file) || !is_rectangular(file))
 		return (1);
-	(void)(file);
 	return (0);
 }
