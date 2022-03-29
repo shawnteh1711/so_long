@@ -6,7 +6,7 @@
 /*   By: steh <steh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 19:19:29 by steh              #+#    #+#             */
-/*   Updated: 2022/03/28 15:56:12 by steh             ###   ########.fr       */
+/*   Updated: 2022/03/29 19:38:57 by steh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define SO_LONG_H
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 10
+#  define TRUE 1
+#  define FALSE 0
 # endif
 
 # include <stdio.h>
@@ -33,7 +35,10 @@
 
 typedef struct	s_map
 {
-	int	px;
+	int		px;
+	int		coin;
+	int		exit;
+	int		player;
 }	t_map;
 
 typedef struct	s_data 
@@ -44,7 +49,7 @@ typedef struct	s_data
 	int		line_length;
 	int		endian;
 	int		px;
-	t_map		map;
+	t_map	map;
 }	t_data;
 
 
@@ -52,7 +57,7 @@ typedef struct	s_data
 char	*get_next_line(int fd);
 
 // validate map is correct
-int		map_validity(char *file);
+int		map_validity(char *file, t_map *map);
 
 
 #endif

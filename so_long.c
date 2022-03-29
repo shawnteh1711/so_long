@@ -6,7 +6,7 @@
 /*   By: steh <steh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 12:20:53 by steh              #+#    #+#             */
-/*   Updated: 2022/03/28 16:34:24 by steh             ###   ########.fr       */
+/*   Updated: 2022/03/29 19:38:54 by steh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,13 @@ int	main(int argc, char *argv[])
 {
 	// void	*mlx;
 	// void	*mlx_win;
-	// t_data	img;
+	t_data	game;
 
 	// (void)argv;
 	// img.px = 500;
 	if (argc != 2)
 		ft_putendl_fd("Please use:	./so_long map", 2);
-	else if (argc == 2 && map_validity(argv[1]))
+	else if (argc == 2 && map_validity(argv[1], &game.map))
 	{
 		// mlx = mlx_init();
 		// mlx_win = mlx_new_window(mlx, 1920, 1080, "So_long!");

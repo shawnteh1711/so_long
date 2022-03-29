@@ -6,7 +6,7 @@
 /*   By: steh <steh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 10:17:30 by steh              #+#    #+#             */
-/*   Updated: 2022/03/28 15:57:38 by steh             ###   ########.fr       */
+/*   Updated: 2022/03/29 15:44:31 by steh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ char	*ft_read_and_save(int fd, char *save_line)
 		save_line = ft_strjoin(save_line, buffer);
 	}
 	free(buffer);
-
 	return (save_line);
 }
 

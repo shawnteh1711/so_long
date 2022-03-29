@@ -6,7 +6,7 @@
 /*   By: steh <steh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 11:06:45 by steh              #+#    #+#             */
-/*   Updated: 2022/03/28 15:57:35 by steh             ###   ########.fr       */
+/*   Updated: 2022/03/29 15:45:55 by steh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,6 @@ char	*ft_strjoin(char *s1, char *s2)
 		return (NULL);
 	ft_strlcpy(new, s1, len);
 	ft_strlcat(new, s2, len);
+	free(s1);
 	return (new);
 }
