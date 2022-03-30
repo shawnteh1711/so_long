@@ -2,7 +2,7 @@ NAME	= so_long
 CC		= gcc
 CFLAGS	= -Wall -Wextra -Werror -c -g
 RM		= rm -rf
-SRCS	= so_long.c validate.c get_next_line.c
+SRCS	= so_long.c validate.c validate2.c get_next_line.c
 OBJS	= $(SRCS:.c=.o)
 
 all		: $(NAME)

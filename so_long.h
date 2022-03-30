@@ -6,7 +6,7 @@
 /*   By: steh <steh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 19:19:29 by steh              #+#    #+#             */
-/*   Updated: 2022/03/29 19:38:57 by steh             ###   ########.fr       */
+/*   Updated: 2022/03/30 14:42:36 by steh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,9 @@ typedef struct	s_map
 	int		coin;
 	int		exit;
 	int		player;
+	size_t	col_num;
+	size_t	row_num;
+	char	**maparray;
 }	t_map;
 
 typedef struct	s_data 
@@ -58,6 +61,10 @@ char	*get_next_line(int fd);
 
 // validate map is correct
 int		map_validity(char *file, t_map *map);
-
+int		is_ber(char *file);
+int		is_rectangular(char *file, t_map *map);
+int		map_surround_wall(char *file, t_map *map);
+int		map_contains_cep(char *file, t_map *map);
+char	*ft_strdup2(const char *src, size_t col_num);
 
 #endif
