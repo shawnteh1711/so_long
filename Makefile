@@ -2,13 +2,11 @@ NAME	= so_long
 CC		= gcc
 CFLAGS	= -Wall -Wextra -Werror -c -g
 RM		= rm -rf
-SRCS	= so_long.c validate.c validate2.c get_next_line.c
+SRCS	= so_long.c validate.c validate2.c get_next_line.c \
+			check_utils.c setup.c close.c
 OBJS	= $(SRCS:.c=.o)
 
 all		: $(NAME)
-
-%.o		: %.c
-		$(CC) $(CFLAGS) $< -o $@
 
 $(NAME)	: $(OBJS) minilibx libft libft_printf
 		$(CC) $(OBJS) -Lminilibx_opengl_20191021 -lmlx -Llibft -lft \

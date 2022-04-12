@@ -6,41 +6,29 @@
 /*   By: steh <steh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 12:20:53 by steh              #+#    #+#             */
-/*   Updated: 2022/03/30 19:44:17 by steh             ###   ########.fr       */
+/*   Updated: 2022/04/12 20:05:01 by steh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "so_long.h"
-
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
-{
-	char	*dst;
-
-	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
-	*(unsigned int*)dst = color;
-}
+#include "so_long.h"
 
 int	main(int argc, char *argv[])
 {
-	// void	*mlx;
-	// void	*mlx_win;
-	t_data	game;
+	t_data	g;
 
-	// (void)argv;
-	// img.px = 500;
+	g.px = 32;
 	if (argc != 2)
-		ft_putendl_fd("Please use:	./so_long map", 2);
-	else if (argc == 2 && map_validity(argv[1], &game.map))
+		ft_printf("Please use:	./so_long map.ber\n");
+	else if (argc == 2 && map_validity(argv[1], &g.map))
 	{
-		// mlx = mlx_init();
-		// mlx_win = mlx_new_window(mlx, 1920, 1080, "So_long!");
-		// img.img = mlx_new_image(mlx, 1920, 1080);
-		// img.img = mlx_png_file_to_image(mlx, "png/c1.png", &img.px, &img.px);
-		// img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
-		// mlx_pixel_put(mlx, mlx_win,  250, 250, 0x00FF0000);
-		// my_mlx_pixel_put(&img, 25, 25, 0x00FF0000);
-		// mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
-		// mlx_loop(mlx);
+		g.mlx = mlx_init();
+		g.win = mlx_new_window(g.mlx, g.map.col_num * g.px,
+				g.map.row_num * g.px, "So_long!");
+		init_map(&g);
+		put_image(&g);
+		mlx_hook(g.win, 17, 0, close_game, &g);
+		mlx_key_hook(g.win, key_hook, &g);
+		mlx_loop(g.mlx);
 	}
 	// system("leaks so_long");
 	return (0);
