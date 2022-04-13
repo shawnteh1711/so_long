@@ -6,7 +6,7 @@
 /*   By: steh <steh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 11:53:43 by steh              #+#    #+#             */
-/*   Updated: 2022/04/12 17:09:32 by steh             ###   ########.fr       */
+/*   Updated: 2022/04/13 18:12:44 by steh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,4 +74,20 @@ size_t	ft_strlen2(const char *s)
 	while (s[i] != '\0' && s[i] != '\n')
 		i++;
 	return (i);
+}
+
+int	check_invalid_char(char *line, t_map *map)
+{
+	size_t	i;
+	char	*elements;
+
+	i = 0;
+	elements = "10ECGP";
+	while (i < map->col_num)
+	{
+		if (!ft_strchr(elements, line[i]))
+			return (1);
+		i++;
+	}
+	return (0);
 }

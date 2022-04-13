@@ -6,7 +6,7 @@
 /*   By: steh <steh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 14:52:47 by steh              #+#    #+#             */
-/*   Updated: 2022/04/12 17:10:59 by steh             ###   ########.fr       */
+/*   Updated: 2022/04/13 18:31:44 by steh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,16 @@
 // must have 1 e, 1 c, 1 p 
 // must be rectangular
 // must surround with walls(1)
-int	file_is_ber(char *file)
+int	file_is_ber(char *file, t_map *map)
 {
 	char	*ext;
 	int		len;
+	int		fd;
 
+	(void)map;
+	fd = open(file, O_RDONLY);
+	if (fd < 0)
+		map->invalid_file = -1;
 	len = ft_strlen(file);
 	ext = (char *)ft_memchr(file, '.', len);
 	if (!ft_strncmp(ext, ".ber", len))
@@ -84,12 +89,10 @@ int	map_surround_wall(char *file, t_map *map)
 			return (FALSE);
 		i++;
 	}
-	// while (i < map->row_num)
-	// 	free(map->maparray[i++]);
 	return (TRUE);
 }
 
-int	map_contains_cep(char *file, t_map *map)
+void	map_contains_cep(char *file, t_map *map)
 {
 	int		fd;
 	char	*line;
@@ -101,11 +104,10 @@ int	map_contains_cep(char *file, t_map *map)
 		map->coin += count_char(line, 'C');
 		map->exit += count_char(line, 'E');
 		map->player += count_char(line, 'P');
+		if (check_invalid_char(line, map))
+			map->invalid_char += 1;
 		free(line);
 		line = get_next_line(fd);
 	}
 	close(fd);
-	if (!map->coin || !map->exit || map->player != 1)
-		return (FALSE);
-	return (TRUE);
 }
