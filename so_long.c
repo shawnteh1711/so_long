@@ -6,7 +6,7 @@
 /*   By: steh <steh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 12:20:53 by steh              #+#    #+#             */
-/*   Updated: 2022/04/13 18:38:55 by steh             ###   ########.fr       */
+/*   Updated: 2022/04/15 09:26:16 by steh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,5 @@ int	main(int argc, char *argv[])
 		mlx_key_hook(g.win, key_hook, &g);
 		mlx_loop(g.mlx);
 	}
-	// system("leaks so_long");
 	return (0);
 }

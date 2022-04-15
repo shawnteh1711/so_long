@@ -6,7 +6,7 @@
 /*   By: steh <steh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 19:19:29 by steh              #+#    #+#             */
-/*   Updated: 2022/04/13 18:43:05 by steh             ###   ########.fr       */
+/*   Updated: 2022/04/15 21:04:48 by steh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 #  define DOWN 1
 #  define TRUE 1
 #  define FALSE 0
+#  define RED "\033[0;31m"
+#  define GREEN "\033[0;32m"
 # endif
 
 # include <stdio.h>
@@ -58,6 +60,7 @@ typedef struct	s_enemy
 typedef struct	s_image
 {
 	void	*p;
+	void	*p2;
 	void	*c;
 	void	*g;
 	void	*w;
@@ -99,6 +102,9 @@ int		map_is_rectangular(char *file, t_map *map);
 int		map_surround_wall(char *file, t_map *map);
 void	map_contains_cep(char *file, t_map *map);
 
+// validate2
+int		check_newline_eof(char *file, t_map *map);
+
 // check utils
 char	**create_2d_array(char *file, t_map *map);
 int		count_char(char *line, char c);
@@ -109,7 +115,8 @@ int		check_invalid_char(char *line, t_map *map);
 // setup
 void	init_map(t_data *g);
 void	put_image(t_data *g);
-int		update_p(t_data *g, int i, int j);
+int		update_player(t_data *g, int i, int j);
+int		update_enemy(t_data *g, int i, int j);
 void	init_g(t_data *g);
 
 // close
@@ -119,6 +126,9 @@ int		key_hook(int keycode, t_data *g);
 
 // gameplay
 void	move(t_data *g);
+void	move_enemy(t_data *g);
 void	edit_array(t_data *g);
+void	animate(t_data *g);
+void check_leaks();
 
 #endif

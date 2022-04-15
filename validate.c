@@ -6,7 +6,7 @@
 /*   By: steh <steh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 14:52:47 by steh              #+#    #+#             */
-/*   Updated: 2022/04/13 18:31:44 by steh             ###   ########.fr       */
+/*   Updated: 2022/04/15 21:04:57 by steh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int	file_is_ber(char *file, t_map *map)
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
 		map->invalid_file = -1;
+	close(fd);
 	len = ft_strlen(file);
 	ext = (char *)ft_memchr(file, '.', len);
 	if (!ft_strncmp(ext, ".ber", len))
@@ -45,6 +46,7 @@ int	map_is_rectangular(char *file, t_map *map)
 	size_t	i;
 
 	i = 0;
+	is_rect = TRUE;
 	fd = open(file, O_RDONLY);
 	line = get_next_line(fd);
 	if (line == NULL)
@@ -59,7 +61,6 @@ int	map_is_rectangular(char *file, t_map *map)
 		line = get_next_line(fd);
 		map->row_num++;
 	}
-	free(line);
 	close(fd);
 	if (is_rect == FALSE)
 		return (FALSE);
