@@ -6,7 +6,7 @@
 /*   By: steh <steh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 19:19:29 by steh              #+#    #+#             */
-/*   Updated: 2022/04/15 21:04:48 by steh             ###   ########.fr       */
+/*   Updated: 2022/04/16 14:30:20 by steh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,12 @@ typedef struct	s_image
 	void	*p;
 	void	*p2;
 	void	*c;
+	void	*c1;
+	void	*c2;
 	void	*g;
 	void	*w;
 	void	*exit;
+	void	*tmp;
 }	t_image;
 
 typedef struct	s_map
@@ -85,6 +88,7 @@ typedef struct	s_data
 	int			px;
 	void		*mlx;
 	void		*win;
+	int			frame;
 	t_map		map;
 	t_image		image;
 	t_player	player;
@@ -114,7 +118,7 @@ int		check_invalid_char(char *line, t_map *map);
 
 // setup
 void	init_map(t_data *g);
-void	put_image(t_data *g);
+int		put_image(t_data *g);
 int		update_player(t_data *g, int i, int j);
 int		update_enemy(t_data *g, int i, int j);
 void	init_g(t_data *g);
@@ -125,10 +129,15 @@ void	free_array(t_data *g);
 int		key_hook(int keycode, t_data *g);
 
 // gameplay
-void	move(t_data *g);
-void	move_enemy(t_data *g);
+int		move(t_data *g);
+int		move_enemy(t_data *g);
 void	edit_array(t_data *g);
-void	animate(t_data *g);
+void	animate_player(t_data *g);
 void check_leaks();
+
+// animation
+int		animate(t_data *g);
+void	render_coin(t_data *g, int i, int j, int type);
+
 
 #endif

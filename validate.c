@@ -6,7 +6,7 @@
 /*   By: steh <steh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 14:52:47 by steh              #+#    #+#             */
-/*   Updated: 2022/04/15 21:04:57 by steh             ###   ########.fr       */
+/*   Updated: 2022/04/16 09:59:06 by steh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ void	map_contains_cep(char *file, t_map *map)
 		map->coin += count_char(line, 'C');
 		map->exit += count_char(line, 'E');
 		map->player += count_char(line, 'P');
-		if (check_invalid_char(line, map))
+			if (check_invalid_char(line, map))
 			map->invalid_char += 1;
 		free(line);
 		line = get_next_line(fd);

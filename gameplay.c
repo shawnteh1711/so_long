@@ -6,20 +6,20 @@
 /*   By: steh <steh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 19:01:26 by steh              #+#    #+#             */
-/*   Updated: 2022/04/15 21:16:41 by steh             ###   ########.fr       */
+/*   Updated: 2022/04/16 14:35:04 by steh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	move(t_data *g)
+int	move(t_data *g)
 {
 	char	*moves;
 
 	move_enemy(g);
 	if (g->map.maparray[g->player.next_step.y][g->player.next_step.x] == 'C')
 		g->map.coin -= 1;
-	animate(g);
+	animate_player(g);
 	if ((g->map.maparray[g->player.next_step.y][g->player.next_step.x] == 'E')
 		|| g->map.maparray[g->player.next_step.y][g->player.next_step.x] == 'G')
 		close_game(g);
@@ -30,47 +30,37 @@ void	move(t_data *g)
 	moves = ft_itoa(g->player.moves);
 	mlx_string_put(g->mlx, g->win, 40, 40, 0x00FFFFFF, moves);
 	free(moves);
+	return (0);
 }
 
 // move enemy when the next step is space
 // replace next step space with enemy
 // current step replace with space
 // need to automate the movement
-void	move_enemy(t_data *g)
+int	move_enemy(t_data *g)
 {
-	int	i;
-	int	y;
-	int	k;
-	int	e_y;
-	int	e_x;
+	static	int	direction;
+	int			e_y;
+	int			e_x;
 
-	i = 0;
-	
 	e_y = g->enemy.actual.y;
 	e_x = g->enemy.actual.x;
-	y = 0;
-	k = 0;
-	while (i < 100)
+	if (direction < 0)
 	{
-		if (g->map.maparray[e_y][e_x - 1] != '1')
-		{
-			g->map.maparray[e_y][e_x - 1] = 'G';
-			g->map.maparray[e_y][e_x] = '0';
-			ft_printf("y:%d\n", y);
-			y++;
-		}
-		else
-		{
-			if (k < y && g->map.maparray[e_y][e_x + 1] != '1')
-			{
-				g->map.maparray[e_y][e_x + 1] = 'G';
-				g->map.maparray[e_y][e_x] = '0';
-				ft_printf("k:%d\n", k);
-				k++;
-			}
-		}
-		i++;
+		if (g->map.maparray[e_y][e_x - 1] == '1')
+			direction = 1;
 	}
+	else
+	{
+		direction = 1;
+		if (g->map.maparray[e_y][e_x + 1] == '1')
+			direction = -1;
+	}
+	g->map.maparray[e_y][e_x + direction] = 'G';
+	g->map.maparray[e_y][e_x] = '0';
+	// mlx_clear_window(g->mlx, g->win);
+	// put_image(g);
+	return (0);
 }
 
 void	edit_array(t_data *g)
@@ -81,13 +71,11 @@ void	edit_array(t_data *g)
 
 // after collect coins get, player return to original image
 // make coin rotate;
-void	animate(t_data *g)
+void	animate_player(t_data *g)
 {
-	void	*tmp;
-
-	tmp = g->image.p;
 	if (g->map.maparray[g->player.next_step.y][g->player.next_step.x] == 'C')
 		g->image.p = g->image.p2;
-	if (g->map.maparray[g->player.next_step.y][g->player.next_step.x] == '0')
-		g->image.p = tmp;
+	else if (g->map.maparray[g->player.next_step.y][g->player.next_step.x] == '0')
+		g->image.p = g->image.tmp;
 }
+

@@ -6,7 +6,7 @@
 /*   By: steh <steh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:17:46 by steh              #+#    #+#             */
-/*   Updated: 2022/04/15 21:20:40 by steh             ###   ########.fr       */
+/*   Updated: 2022/04/16 14:34:30 by steh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,13 @@ int	key_hook(int keycode, t_data *g)
 	if (keycode == ESC)
 		close_game(g);
 	else if (keycode == LEFT)
-		g->player.next_step.x = g->player.next_step.x - 1;
+		g->player.next_step.x = g->player.pre_step.x - 1;
 	else if (keycode == RIGHT)
-		g->player.next_step.x = g->player.next_step.x + 1;
+		g->player.next_step.x = g->player.pre_step.x + 1;
 	else if (keycode == UP)
-		g->player.next_step.y = g->player.next_step.y - 1;
+		g->player.next_step.y = g->player.pre_step.y - 1;
 	else if (keycode == DOWN)
-		g->player.next_step.y = g->player.next_step.y + 1;
+		g->player.next_step.y = g->player.pre_step.y + 1;
 	else
 		return (0);
 	if (g->map.maparray[g->player.next_step.y][g->player.next_step.x] != '1')
@@ -57,8 +57,9 @@ int	close_game(t_data *g)
 	// free(g->map.maparray);
 	free_array(g);
 	// check_leaks();
-	system("leaks so_long");
+	// system("leaks so_long");
 	exit(0);
+	return (0);
 }
 
 // 7 leaks
@@ -69,14 +70,5 @@ void	free_array(t_data *g)
 	i = 0;
 	while (i < g->map.row_num)
 		free(g->map.maparray[i++]);
-	// while (i < g->map.row_num)
-	// {
-	// 	j = 0;
-	// 	while (j < g->map.col_num - 1)
-	// 	{
-	// 		free((void *)g->map.maparray[i][j]);
-	// 		j++;
-	// 	}
-	// 	i++;
-	// }
+	free(g->map.maparray);
 }
