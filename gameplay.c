@@ -6,7 +6,7 @@
 /*   By: steh <steh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 19:01:26 by steh              #+#    #+#             */
-/*   Updated: 2022/04/16 14:35:04 by steh             ###   ########.fr       */
+/*   Updated: 2022/04/16 18:01:36 by steh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,9 @@ int	move(t_data *g)
 {
 	char	*moves;
 
-	move_enemy(g);
+	animate_player(g);
 	if (g->map.maparray[g->player.next_step.y][g->player.next_step.x] == 'C')
 		g->map.coin -= 1;
-	animate_player(g);
 	if ((g->map.maparray[g->player.next_step.y][g->player.next_step.x] == 'E')
 		|| g->map.maparray[g->player.next_step.y][g->player.next_step.x] == 'G')
 		close_game(g);
@@ -39,27 +38,27 @@ int	move(t_data *g)
 // need to automate the movement
 int	move_enemy(t_data *g)
 {
-	static	int	direction;
+	static	int	direction_x;
 	int			e_y;
 	int			e_x;
 
-	e_y = g->enemy.actual.y;
 	e_x = g->enemy.actual.x;
-	if (direction < 0)
+	e_y = g->enemy.actual.y;
+	if (direction_x < 0)
 	{
-		if (g->map.maparray[e_y][e_x - 1] == '1')
-			direction = 1;
+		if (g->map.maparray[e_y][e_x - 1] == '1'
+			|| g->map.maparray[e_y][e_x - 1] == 'C')
+			direction_x = 1;
 	}
 	else
 	{
-		direction = 1;
-		if (g->map.maparray[e_y][e_x + 1] == '1')
-			direction = -1;
+		direction_x = 1;
+		if (g->map.maparray[e_y][e_x + 1] == '1'
+			|| g->map.maparray[e_y][e_x + 1] == 'C')
+			direction_x = -1;
 	}
-	g->map.maparray[e_y][e_x + direction] = 'G';
+	g->map.maparray[e_y][e_x + direction_x] = 'G';
 	g->map.maparray[e_y][e_x] = '0';
-	// mlx_clear_window(g->mlx, g->win);
-	// put_image(g);
 	return (0);
 }
 

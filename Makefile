@@ -1,6 +1,6 @@
 NAME	= so_long
 CC		= gcc
-CFLAGS	= -Wall -Wextra -Werror -c -g
+CFLAGS	= -Wall -Wextra -Werror -c
 RM		= rm -rf
 SRCS	= so_long.c validate.c validate2.c get_next_line.c \
 			check_utils.c setup.c close.c gameplay.c \

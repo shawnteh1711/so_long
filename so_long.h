@@ -6,7 +6,7 @@
 /*   By: steh <steh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 19:19:29 by steh              #+#    #+#             */
-/*   Updated: 2022/04/16 14:30:20 by steh             ###   ########.fr       */
+/*   Updated: 2022/04/16 15:51:09 by steh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ typedef struct	s_data
 char	*get_next_line(int fd);
 
 // validate map is correct
-int		map_validity(char *file, t_map *map);
+int		map_validity(char *file, t_map *map, t_data *g);
 int		file_is_ber(char *file, t_map *map);
 int		map_is_rectangular(char *file, t_map *map);
 int		map_surround_wall(char *file, t_map *map);
@@ -125,7 +125,7 @@ void	init_g(t_data *g);
 
 // close
 int		close_game(t_data *g);
-void	free_array(t_data *g);
+void	free_memory(t_data *g);
 int		key_hook(int keycode, t_data *g);
 
 // gameplay

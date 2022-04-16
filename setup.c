@@ -6,7 +6,7 @@
 /*   By: steh <steh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 15:21:34 by steh              #+#    #+#             */
-/*   Updated: 2022/04/16 14:27:57 by steh             ###   ########.fr       */
+/*   Updated: 2022/04/16 19:08:31 by steh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,21 +30,24 @@ void	init_map(t_data *g)
 
 int	put_image(t_data *g)
 {
-	int	i;
-	int	j;
-	int	(*f)(void *, void *, void *, int x, int y);
+	size_t	i;
+	size_t	j;
+	int		(*f)(void *, void *, void *, int x, int y);
 
 	f = mlx_put_image_to_window;
-	i = -1;
-	while (++i < (int)g->map.row_num)
+	i = 0;
+	ft_printf("%n\n", g->map.row_num);
+	ft_printf("%d\n", g->map.col_num);
+	while (i < g->map.row_num)
 	{
-		j = -1;
-		while (++j < (int)g->map.col_num)
+		j = 0;
+		ft_printf("i\n");
+		while (j < g->map.col_num)
 		{
+			ft_printf("j\n");
 			if (g->map.maparray[i][j] == '1')
 				f(g->mlx, g->win, g->image.w, j * g->map.px, i * g->map.px);
 			else if (g->map.maparray[i][j] == 'C')
-				// render_coin(g, i, j, type);
 				f(g->mlx, g->win, g->image.c, j * g->map.px, i * g->map.px);
 			else if (g->map.maparray[i][j] == 'E')
 				f(g->mlx, g->win, g->image.exit, j * g->map.px, i * g->map.px);
@@ -52,11 +55,14 @@ int	put_image(t_data *g)
 				f(g->mlx, g->win, g->image.p, j * g->map.px, i * g->map.px);
 			else if (g->map.maparray[i][j] == 'G' && update_enemy(g, i, j))
 				f(g->mlx, g->win, g->image.g, j * g->map.px, i * g->map.px);
-			
+			j++;
 		}
+		i++;
 	}
 	return (0);
 }
+
+
 
 // how to move the player and update the position
 int	update_player(t_data *g, int i, int j)

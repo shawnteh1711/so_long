@@ -6,7 +6,7 @@
 /*   By: steh <steh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 12:31:00 by steh              #+#    #+#             */
-/*   Updated: 2022/04/16 14:28:31 by steh             ###   ########.fr       */
+/*   Updated: 2022/04/16 18:36:10 by steh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,17 @@ void	render_coin(t_data *g, int i, int j, int type)
 
 int	animate(t_data *g)
 {
+	ft_printf("frame %d\n", g->frame);
 	g->frame++;
 	if (g->frame < 10)
-		put_image(g);
+		ft_printf("frame %d\n", g->frame);
+		// put_image(g);
 	else if (g->frame < 20)
-		put_image(g);
+		ft_printf("frame %d\n", g->frame);
+		// put_image(g);
 	else if (g->frame < 30)
-		put_image(g);
+		ft_printf("frame %d\n", g->frame);
+		// put_image(g);
 	g->frame = 0;
 	return (0);
 }

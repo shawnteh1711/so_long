@@ -6,7 +6,7 @@
 /*   By: steh <steh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 11:53:43 by steh              #+#    #+#             */
-/*   Updated: 2022/04/15 14:51:38 by steh             ###   ########.fr       */
+/*   Updated: 2022/04/16 16:46:46 by steh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ char	*ft_strdup2(const char *src, size_t col_num)
 	size_t	i;
 
 	i = 0;
-	dest = (char *)malloc(sizeof(char) * (col_num));
+	dest = (char *)malloc(sizeof(char) * (col_num + 1));
 	if (dest == NULL)
 		return (NULL);
 	if (col_num == 0)

@@ -1,7 +1,7 @@
 NAME		:= libftprintf.a
 CC			:= gcc
 AR			:= ar rcs
-CFLAGS		:= -Wall -Werror -Wextra -c -g
+CFLAGS		:= -Wall -Werror -Wextra -c 
 SRCS		= ./libft/ft*.c ./srcs/ft*.c
 OBJS		= ft*.o
 LIBFT		= ./libft
