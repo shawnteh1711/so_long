@@ -6,7 +6,7 @@
 /*   By: steh <steh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 13:17:17 by steh              #+#    #+#             */
-/*   Updated: 2022/04/16 16:03:20 by steh             ###   ########.fr       */
+/*   Updated: 2022/04/18 09:55:23 by steh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,52 +33,61 @@ int	check_newline_eof(char *file, t_map *map)
 	return (TRUE);
 }
 
+void	print_error2(int errorcode, t_data *g)
+{
+	if (errorcode == 6)
+		ft_printf("map should have at least one coin\n");
+	else if (errorcode == 7)
+		ft_printf("map should have at least one exit\n");
+	else if (errorcode == 8)
+		ft_printf("map should have one player only\n");
+	else if (errorcode == 9)
+		ft_printf("map contains char other than \"10ECPG\"\n");
+	free_memory_invalid_file(g);
+	exit(0);
+}
 
 void	print_error(int errorcode, t_data *g)
 {
-	(void)g;
 	if (errorcode == 1)
-		ft_printf("file should be ber");
+	{
+		if (g->map.invalid_file == -1)
+			ft_printf("file not valid\n");
+		else
+			ft_printf("file should be ber\n");
+	}
 	else if (errorcode == 2)
-		ft_printf("file not valid");
-	else if (errorcode == 3)
-		ft_printf("map should be rectangular");
+	{
+		if (g->map.empty_file == -1)
+			ft_printf("map is empty\n");
+		else
+			ft_printf("map should be rectangular\n");
+	}
 	else if (errorcode == 4)
-		ft_printf("map invalid size");
+		ft_printf("map invalid size\n");
 	else if (errorcode == 5)
-		ft_printf("map should have border");
-	else if (errorcode == 6)
-		ft_printf("map should have at least one coin");
-	else if (errorcode == 7)
-		ft_printf("map should have at least one exit");
-	else if (errorcode == 8)
-		ft_printf("map should have one player only");
-	else if (errorcode == 9)
-		ft_printf("map contains char other than \"10ECPG\"");
-	free_memory(g);
-	exit(0);
+		ft_printf("map should have border\n");
+	print_error2(errorcode, g);
 }
 
 int	map_validity(char *file, t_map *map, t_data *g)
 {
 	if (!file_is_ber(file, map))
 		print_error(1, g);
-	else if (map->invalid_file == -1)
-		print_error(2, g);
 	else if (!map_is_rectangular(file, map))
-		print_error(3, g);
+		print_error(2, g);
 	else if (!check_newline_eof(file, map))
-		print_error(4, g);
+		print_error(3, g);
 	else if (!map_surround_wall(file, map))
-		print_error(5, g);
+		print_error(4, g);
 	map_contains_cep(file, map);
 	if (!map->coin)
-		print_error(6, g);
+		print_error(5, g);
 	else if (!map->exit)
-		print_error(7, g);
+		print_error(6, g);
 	else if (map->player != 1)
-		print_error(8, g);
+		print_error(7, g);
 	else if (map->invalid_char > 0)
-		print_error(9, g);
+		print_error(8, g);
 	return (1);
 }

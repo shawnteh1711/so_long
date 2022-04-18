@@ -6,7 +6,7 @@
 /*   By: steh <steh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 15:21:34 by steh              #+#    #+#             */
-/*   Updated: 2022/04/16 19:08:31 by steh             ###   ########.fr       */
+/*   Updated: 2022/04/18 11:28:20 by steh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,15 @@ void	init_map(t_data *g)
 {
 	void	*(*f)(void *, char *, int *x, int *y);
 
-	f = mlx_png_file_to_image;
-	g->image.w = f(g->mlx, "png/barrel.png", &g->map.px, &g->map.px);
-	g->image.p = f(g->mlx, "png/pacman.png", &g->map.px, &g->map.px);
-	g->image.p2 = f(g->mlx, "png/pacman2.png", &g->map.px, &g->map.px);
-	g->image.c = f(g->mlx, "png/c1.png", &g->map.px, &g->map.px);
-	// g->image.c = f(g->mlx, "png/c1.png", &g->map.px, &g->map.px);
-	// g->image.c = f(g->mlx, "png/c1.png", &g->map.px, &g->map.px);
-	g->image.exit = f(g->mlx, "png/portal.png", &g->map.px, &g->map.px);
-	g->image.g = f(g->mlx, "png/ghost.png", &g->map.px, &g->map.px);
-	g->image.tmp = f(g->mlx, "png/pacman.png", &g->map.px, &g->map.px);
+	f = mlx_xpm_file_to_image;
+
+	g->image.w = f(g->mlx, "png/barrel.xpm", &g->map.px, &g->map.px);
+	g->image.p = f(g->mlx, "png/pacman.xpm", &g->map.px, &g->map.px);
+	g->image.p2 = f(g->mlx, "png/pacman2.xpm", &g->map.px, &g->map.px);
+	g->image.c = f(g->mlx, "png/c1.xpm", &g->map.px, &g->map.px);
+	g->image.exit = f(g->mlx, "png/portal.xpm", &g->map.px, &g->map.px);
+	g->image.g = f(g->mlx, "png/ghost.xpm", &g->map.px, &g->map.px);
+	g->image.tmp = f(g->mlx, "png/pacman.xpm", &g->map.px, &g->map.px);
 }
 
 int	put_image(t_data *g)
@@ -36,15 +35,14 @@ int	put_image(t_data *g)
 
 	f = mlx_put_image_to_window;
 	i = 0;
-	ft_printf("%n\n", g->map.row_num);
-	ft_printf("%d\n", g->map.col_num);
+	j = 0;
+	// ft_printf("%n\n", g->map.row_num);
+	// ft_printf("%d\n", g->map.col_num);
 	while (i < g->map.row_num)
 	{
 		j = 0;
-		ft_printf("i\n");
 		while (j < g->map.col_num)
 		{
-			ft_printf("j\n");
 			if (g->map.maparray[i][j] == '1')
 				f(g->mlx, g->win, g->image.w, j * g->map.px, i * g->map.px);
 			else if (g->map.maparray[i][j] == 'C')

@@ -6,7 +6,7 @@
 /*   By: steh <steh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 19:01:26 by steh              #+#    #+#             */
-/*   Updated: 2022/04/16 18:01:36 by steh             ###   ########.fr       */
+/*   Updated: 2022/04/18 10:20:45 by steh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,5 +76,5 @@ void	animate_player(t_data *g)
 		g->image.p = g->image.p2;
 	else if (g->map.maparray[g->player.next_step.y][g->player.next_step.x] == '0')
 		g->image.p = g->image.tmp;
-}
+	}
 

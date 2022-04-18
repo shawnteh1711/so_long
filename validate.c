@@ -6,7 +6,7 @@
 /*   By: steh <steh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 14:52:47 by steh              #+#    #+#             */
-/*   Updated: 2022/04/16 16:14:54 by steh             ###   ########.fr       */
+/*   Updated: 2022/04/18 09:55:07 by steh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,10 @@ int	map_is_rectangular(char *file, t_map *map)
 	fd = open(file, O_RDONLY);
 	line = get_next_line(fd);
 	if (line == NULL)
+	{
+		map->empty_file = -1;
 		return (FALSE);
+	}
 	map->col_num = ft_strlen2(line);
 	while (line)
 	{

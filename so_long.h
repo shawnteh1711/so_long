@@ -6,7 +6,7 @@
 /*   By: steh <steh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 19:19:29 by steh              #+#    #+#             */
-/*   Updated: 2022/04/16 15:51:09 by steh             ###   ########.fr       */
+/*   Updated: 2022/04/18 11:57:15 by steh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ typedef struct	s_map
 	int		player;
 	int		invalid_char;
 	int		invalid_file;
+	int		empty_file;
 	size_t	col_num;
 	size_t	row_num;
 	char	**maparray;
@@ -94,7 +95,6 @@ typedef struct	s_data
 	t_player	player;
 	t_enemy		enemy;
 }	t_data;
-
 
 // get next line 
 char	*get_next_line(int fd);
@@ -125,6 +125,7 @@ void	init_g(t_data *g);
 
 // close
 int		close_game(t_data *g);
+void	free_memory_invalid_file(t_data *g);
 void	free_memory(t_data *g);
 int		key_hook(int keycode, t_data *g);
 

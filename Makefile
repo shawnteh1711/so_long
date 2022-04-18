@@ -4,7 +4,7 @@ CFLAGS	= -Wall -Wextra -Werror -c
 RM		= rm -rf
 SRCS	= so_long.c validate.c validate2.c get_next_line.c \
 			check_utils.c setup.c close.c gameplay.c \
-			animations/animation_utils.c 
+			animations/animation_utils.c
 
 OBJS	= $(SRCS:.c=.o)
 
