@@ -6,7 +6,7 @@
 /*   By: steh <steh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 19:01:26 by steh              #+#    #+#             */
-/*   Updated: 2022/04/18 10:20:45 by steh             ###   ########.fr       */
+/*   Updated: 2022/04/19 17:43:31 by steh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int	move(t_data *g)
 	char	*moves;
 
 	animate_player(g);
+	move_enemy(g);
 	if (g->map.maparray[g->player.next_step.y][g->player.next_step.x] == 'C')
 		g->map.coin -= 1;
 	if ((g->map.maparray[g->player.next_step.y][g->player.next_step.x] == 'E')
@@ -32,33 +33,41 @@ int	move(t_data *g)
 	return (0);
 }
 
+int	change_direction(t_data *g, int e_y, int e_x, int d_x)
+{
+	if (g->map.maparray[e_y][e_x + 1] == '0')
+		d_x = 1;
+	if (g->map.maparray[e_y][e_x - 1] == '0')
+		d_x = -1;
+	if (g->map.maparray[e_y][e_x - 1] != '0'
+		&& g->map.maparray[e_y][e_x + 1] != '0')
+		d_x = 0;
+	return (d_x);
+}
+
 // move enemy when the next step is space
 // replace next step space with enemy
 // current step replace with space
 // need to automate the movement
 int	move_enemy(t_data *g)
 {
-	static	int	direction_x;
+	static int	direction_x;
 	int			e_y;
 	int			e_x;
+	int			k;
 
-	e_x = g->enemy.actual.x;
-	e_y = g->enemy.actual.y;
-	if (direction_x < 0)
+	k = 0;
+	while (k++ < g->map.enemy)
 	{
-		if (g->map.maparray[e_y][e_x - 1] == '1'
-			|| g->map.maparray[e_y][e_x - 1] == 'C')
-			direction_x = 1;
+		e_y = g->enemies[k].actual.y;
+		e_x = g->enemies[k].actual.x;
+		direction_x = change_direction(g, e_y, e_x, direction_x);
+		if (direction_x != 0)
+		{
+			g->map.maparray[e_y][e_x + direction_x] = 'G';
+			g->map.maparray[e_y][e_x] = '0';
+		}
 	}
-	else
-	{
-		direction_x = 1;
-		if (g->map.maparray[e_y][e_x + 1] == '1'
-			|| g->map.maparray[e_y][e_x + 1] == 'C')
-			direction_x = -1;
-	}
-	g->map.maparray[e_y][e_x + direction_x] = 'G';
-	g->map.maparray[e_y][e_x] = '0';
 	return (0);
 }
 
@@ -72,9 +81,13 @@ void	edit_array(t_data *g)
 // make coin rotate;
 void	animate_player(t_data *g)
 {
-	if (g->map.maparray[g->player.next_step.y][g->player.next_step.x] == 'C')
-		g->image.p = g->image.p2;
-	else if (g->map.maparray[g->player.next_step.y][g->player.next_step.x] == '0')
-		g->image.p = g->image.tmp;
-	}
+	int		y;
+	int		x;
 
+	y = g->player.next_step.y;
+	x = g->player.next_step.x;
+	if (g->map.maparray[y][x] == 'C')
+		g->image.p = g->image.p2;
+	else if (g->map.maparray[y][x] == '0')
+		g->image.p = g->image.tmp;
+}

@@ -6,7 +6,7 @@
 /*   By: steh <steh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 14:52:47 by steh              #+#    #+#             */
-/*   Updated: 2022/04/18 09:55:07 by steh             ###   ########.fr       */
+/*   Updated: 2022/04/19 10:39:12 by steh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,14 +58,7 @@ int	map_is_rectangular(char *file, t_map *map)
 		return (FALSE);
 	}
 	map->col_num = ft_strlen2(line);
-	while (line)
-	{
-		if (ft_strlen2(line) != map->col_num)
-			is_rect = FALSE;
-		free(line);
-		line = get_next_line(fd);
-		map->row_num++;
-	}
+	is_rect = check_rectangular(map, line, is_rect, fd);
 	close(fd);
 	if (is_rect == FALSE)
 		return (FALSE);
@@ -107,10 +100,10 @@ void	map_contains_cep(char *file, t_map *map)
 	line = get_next_line(fd);
 	while (line)
 	{
+		map->player += count_char(line, 'P');
 		map->coin += count_char(line, 'C');
 		map->exit += count_char(line, 'E');
-		map->player += count_char(line, 'P');
-			if (check_invalid_char(line, map))
+		if (check_invalid_char(line, map))
 			map->invalid_char += 1;
 		free(line);
 		line = get_next_line(fd);

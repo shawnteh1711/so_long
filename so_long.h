@@ -6,7 +6,7 @@
 /*   By: steh <steh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 19:19:29 by steh              #+#    #+#             */
-/*   Updated: 2022/04/18 11:57:15 by steh             ###   ########.fr       */
+/*   Updated: 2022/04/19 12:31:57 by steh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ typedef struct	s_map
 	int		coin;
 	int		exit;
 	int		player;
+	int		enemy;
 	int		invalid_char;
 	int		invalid_file;
 	int		empty_file;
@@ -93,6 +94,7 @@ typedef struct	s_data
 	t_map		map;
 	t_image		image;
 	t_player	player;
+	t_enemy		*enemies;
 	t_enemy		enemy;
 }	t_data;
 
@@ -115,12 +117,15 @@ int		count_char(char *line, char c);
 char	*ft_strdup2(const char *src, size_t col_num);
 size_t	ft_strlen2(const char *s);
 int		check_invalid_char(char *line, t_map *map);
+int		check_rectangular(t_map *map, char *line, int is_rect, int fd);
+void	render_image(t_data *g, int i, int j, int *p);
 
 // setup
 void	init_map(t_data *g);
 int		put_image(t_data *g);
+void	init_enemies(t_data *g);
 int		update_player(t_data *g, int i, int j);
-int		update_enemy(t_data *g, int i, int j);
+int		update_enemy(t_data *g, int i, int j, int k);
 void	init_g(t_data *g);
 
 // close
@@ -134,7 +139,6 @@ int		move(t_data *g);
 int		move_enemy(t_data *g);
 void	edit_array(t_data *g);
 void	animate_player(t_data *g);
-void check_leaks();
 
 // animation
 int		animate(t_data *g);

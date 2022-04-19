@@ -6,7 +6,7 @@
 /*   By: steh <steh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 13:17:17 by steh              #+#    #+#             */
-/*   Updated: 2022/04/18 09:55:23 by steh             ###   ########.fr       */
+/*   Updated: 2022/04/19 14:33:55 by steh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,14 @@ int	check_newline_eof(char *file, t_map *map)
 
 void	print_error2(int errorcode, t_data *g)
 {
-	if (errorcode == 6)
-		ft_printf("map should have at least one coin\n");
+	if (errorcode == 5)
+		ft_printf("Error. Map need min one coin\n");
+	else if (errorcode == 6)
+		ft_printf("Error. Map need min exit\n");
 	else if (errorcode == 7)
-		ft_printf("map should have at least one exit\n");
+		ft_printf("Error. Map need one player only\n");
 	else if (errorcode == 8)
-		ft_printf("map should have one player only\n");
-	else if (errorcode == 9)
-		ft_printf("map contains char other than \"10ECPG\"\n");
+		ft_printf("Error. Map have other char than \"10ECPG\"\n");
 	free_memory_invalid_file(g);
 	exit(0);
 }
@@ -52,21 +52,21 @@ void	print_error(int errorcode, t_data *g)
 	if (errorcode == 1)
 	{
 		if (g->map.invalid_file == -1)
-			ft_printf("file not valid\n");
+			ft_printf("Error. File not valid\n");
 		else
-			ft_printf("file should be ber\n");
+			ft_printf("Error. File should be ber\n");
 	}
 	else if (errorcode == 2)
 	{
 		if (g->map.empty_file == -1)
-			ft_printf("map is empty\n");
+			ft_printf("Error. Map is empty\n");
 		else
-			ft_printf("map should be rectangular\n");
+			ft_printf("Error. Map not rectangular\n");
 	}
+	else if (errorcode == 3)
+		ft_printf("Error. Map invalid size\n");
 	else if (errorcode == 4)
-		ft_printf("map invalid size\n");
-	else if (errorcode == 5)
-		ft_printf("map should have border\n");
+		ft_printf("Error. Map is not border\n");
 	print_error2(errorcode, g);
 }
 
