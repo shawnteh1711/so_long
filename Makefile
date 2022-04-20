@@ -10,6 +10,8 @@ OBJS	= $(SRCS:.c=.o)
 
 all		: $(NAME)
 
+bonus	: $(NAME)
+
 $(NAME)	: $(OBJS) minilibx libft libft_printf
 		$(CC) $(OBJS) -Lminilibx_opengl_20191021 -lmlx -Llibft -lft \
 		-Lft_printf -lftprintf \
