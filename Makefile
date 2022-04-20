@@ -12,8 +12,8 @@ all		: $(NAME)
 
 bonus	: $(NAME)
 
-$(NAME)	: $(OBJS) minilibx libft libft_printf
-		$(CC) $(OBJS) -Lminilibx_opengl_20191021 -lmlx -Llibft -lft \
+$(NAME)	: $(OBJS) libft libft_printf
+		$(CC) $(OBJS) -lmlx -Llibft -lft \
 		-Lft_printf -lftprintf \
 		-framework OpenGL -framework AppKit -lz -o $@
 

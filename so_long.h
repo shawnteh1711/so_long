@@ -6,7 +6,7 @@
 /*   By: steh <steh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 19:19:29 by steh              #+#    #+#             */
-/*   Updated: 2022/04/19 12:31:57 by steh             ###   ########.fr       */
+/*   Updated: 2022/04/20 09:46:40 by steh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,6 @@ typedef struct	s_data
 	t_image		image;
 	t_player	player;
 	t_enemy		*enemies;
-	t_enemy		enemy;
 }	t_data;
 
 // get next line 
