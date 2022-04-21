@@ -1,0 +1,49 @@
+GAME
+// program take .ber  extension (map description file)
+// W,A,S,D keys to move character
+// display current number of movements
+// 2D view (top-down or profile)
+
+GRAPHIC
+// display image in window
+// smooth during changing to another window, minimize
+// Press ESP close the window and quit the program
+// click cross on the window will close the window
+
+map
+// map =  walls, collectibles and free space
+// contains 5 characters
+// 0 - empty space
+// 1 - walls
+// C - collectibles
+// E - map exit
+// P - player stating position
+// 1 exit, 1 collectibles, 1 starting position
+// map rectangular
+// surrounded by walls
+
+Bonus
+// player lose when they touch enemy patrol
+// add sprite animation
+// display movement count directly on screen
+
+Keypoint
+1. minilibx
+- basic graphical library writing in C
+- use minilibx_opengl for mac
+- require Appkit and OpenGL to compile
+
+External function 
+// all system call function: open, close, read, write
+// allocate memory: malloc , free
+// math library
+// Minilibx function
+// ft_printf, get_next_line, all code that you code.
+
+
+Minilibx function
+// mlx_init : functionto connect mac graphical server
+// mlx_new_window : manage mlx_new_window
+// mlx_pixel_put : draw inside window
+// mlx_new_image : manipulate put_images
+// mlx_loop : handle keyboard or mourse events
