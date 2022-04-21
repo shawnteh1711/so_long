@@ -17,6 +17,7 @@ $(NAME)	: $(OBJS) libft libft_printf
 		-Lft_printf -lftprintf \
 		-framework OpenGL -framework AppKit -lz -o $@
 
+# in mac no need include minilibx
 minilibx:
 		make -C minilibx_opengl_20191021
 
