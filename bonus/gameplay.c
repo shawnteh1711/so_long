@@ -6,7 +6,7 @@
 /*   By: steh <steh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 19:01:26 by steh              #+#    #+#             */
-/*   Updated: 2022/04/21 11:27:55 by steh             ###   ########.fr       */
+/*   Updated: 2022/04/21 13:31:22 by steh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ int	move(t_data *g)
 		|| g->map.maparray[g->player.next_step.y][g->player.next_step.x] == 'G')
 		close_game(g);
 	g->player.moves += 1;
-	move_enemy(g);
 	edit_array(g);
 	mlx_clear_window(g->mlx, g->win);
 	return (0);
@@ -62,6 +61,9 @@ int	move_enemy(t_data *g)
 		e_y = g->enemies[k].actual.y;
 		e_x = g->enemies[k].actual.x;
 		direction_x = change_direction(g, e_y, e_x, direction_x);
+		if (g->map.maparray[g->player.next_step.y][g->player.next_step.x] == 'E'
+		&& g->map.coin != 0)
+			direction_x = 0;
 		if (direction_x != 0)
 		{
 			g->map.maparray[e_y][e_x + direction_x] = 'G';
@@ -75,6 +77,7 @@ void	edit_array(t_data *g)
 {
 	g->map.maparray[g->player.next_step.y][g->player.next_step.x] = 'P';
 	g->map.maparray[g->player.pre_step.y][g->player.pre_step.x] = '0';
+	move_enemy(g);
 }
 
 // after collect coins get, player return to original image

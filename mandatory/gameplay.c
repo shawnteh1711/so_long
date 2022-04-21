@@ -6,7 +6,7 @@
 /*   By: steh <steh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 19:01:26 by steh              #+#    #+#             */
-/*   Updated: 2022/04/21 10:48:22 by steh             ###   ########.fr       */
+/*   Updated: 2022/04/21 13:28:02 by steh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,9 @@ int	move_enemy(t_data *g)
 		e_y = g->enemies[k].actual.y;
 		e_x = g->enemies[k].actual.x;
 		direction_x = change_direction(g, e_y, e_x, direction_x);
+		if (g->map.maparray[g->player.next_step.y][g->player.next_step.x] == 'E'
+		&& g->map.coin != 0)
+			direction_x = 0;
 		if (direction_x != 0)
 		{
 			g->map.maparray[e_y][e_x + direction_x] = 'G';
